@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block web_title %}大平台报销系统{% endblock %}</title>
+        {% block header_css %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        {% endblock %}
+        {% block header_js %}
+        <script type='text/javascript' src="{% static 'js/jquery-3.2.1.min.js'%}"></script>
+        <script type='text/javascript' src="{% static 'js/bootstrap.min.js'%}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="nav navbar-inverse header">
+            <div class="navbar-header">
+                <span class="navbar-brand">大平台报销系统</span>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'bills_sheet_list' %}">列表</a></li>
+                    <li><a href="{% url 'bills_sheet_create' %}">新建</a></li>
+                    <li><a href="{% url 'logout' %}">注销</a></li>
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div id="main-container" class="container margin-top">
+            {% block container %}{% endblock %}
+        </div>
+        {% block footer_js %}{% endblock %}
+    </body>
+</html>
