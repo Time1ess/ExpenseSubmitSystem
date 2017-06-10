@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-08 19:29
-# Last modified: 2017-06-10 10:43
+# Last modified: 2017-06-10 16:09
 # Filename: settings.py
 # Description:
 """
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'guardian',
     'tools',
     'authentication',
     'bills',
@@ -58,6 +59,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', # default
+    'guardian.backends.ObjectPermissionBackend',
 ]
 
 ROOT_URLCONF = 'ExpenseSubmitSystem.urls'
@@ -141,3 +147,4 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = '/bills'
+LOGIN_URL = '/accounts/login'

@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-09 10:57
-# Last modified: 2017-06-09 12:44
+# Last modified: 2017-06-10 20:51
 # Filename: __init__.py
 # Description:
 BTYPE_OFFICE = 'office'
@@ -83,6 +83,14 @@ ESTATUS_APPROVE = 'approve'
 EXPENSE_STATUSES = (
     (ESTATUS_SUBMIT, '提交'),
     (ESTATUS_REJECT, '拒绝'),
-    (ESTATUS_APPROVE, '修改'),
+    (ESTATUS_AMEND, '修改'),
     (ESTATUS_APPROVE, '批准'),
 )
+
+ESTATUS_TYPES = tuple(x[0] for x in EXPENSE_STATUSES)
+
+DELETE_MSGS = {
+    -1: '删除失败,系统中无此项信息',
+    0: '删除成功, 点击确认进行跳转',
+    1: '删除成功'
+}

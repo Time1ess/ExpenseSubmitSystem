@@ -13,12 +13,20 @@
         <td>{{sheet.amount}}</td>
         <td>{{sheet.get_status_display}}</td>
         <td>
+            {% if is_admin %}
             {% if sheet.status == ESTATUS_SUBMIT or sheet.status == ESTATUS_AMEND %}
+            <a class="label label-success" href={% url 'expense_admin:bills_sheet_detail' sheet.uid %}>处理</a>
+            {% else %}
+            <a class="label label-info" href={% url 'expense_admin:bills_sheet_detail' sheet.uid %}>详情</a>
+            {% endif %}
+            {% else %}
             <a class="label label-info" href={% url 'bills_sheet_detail' sheet.uid %}>详情</a>
+            {% if sheet.status == ESTATUS_SUBMIT or sheet.status == ESTATUS_AMEND %}
             <a class="label label-success" href={% url 'bills_sheet_update' sheet.uid %}>修改</a>
             <a class="label label-danger delete-sheet" sheet-uid="{{sheet.uid}}">撤销</a>
             {% else %}
-            <label class="label label-warning">已处理，无法操作</label>
+            <label class="label label-warning">已处理，无法修改或撤销</label>
+            {% endif %}
             {% endif %}
         </td>
     </tr>

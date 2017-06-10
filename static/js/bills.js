@@ -52,6 +52,8 @@ function delete_bill_info(uid)
             {
                 if(confirm(data.msg))
                     window.location.href = data.redirect;
+                else
+                    window.location.reload();
             }
             else if(data.status == 1)
             {

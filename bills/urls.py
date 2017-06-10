@@ -3,12 +3,13 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-08 19:51
-# Last modified: 2017-06-10 15:27
+# Last modified: 2017-06-10 20:34
 # Filename: urls.py
 # Description:
 from django.conf.urls import url, include
 
 from . import views
+from . import admin_views
 
 
 bill_sheet_patterns = [
@@ -23,8 +24,24 @@ bill_sheet_patterns = [
         url(r'^(?P<uid>.+)$', views.BillsSheetDelete.as_view(), name='bills_sheet_delete')])),
 ]
 
+admin_bill_sheet_patterns = [
+    url(r'^list/', include([
+        url(r'^$', admin_views.AdminBillsSheetList.as_view(), name='bills_sheet_list'),
+        url(r'^(?P<page>\d+)/$', admin_views.AdminBillsSheetList.as_view(), name='bills_sheet_list')])),
+    url(r'^detail/(?P<uid>.+)/$', admin_views.AdminBillsSheetDetail.as_view(), name='bills_sheet_detail'),
+    url(r'^update/(?P<uid>.+)/$', admin_views.AdminBillsSheetDetail.as_view(), name='bills_sheet_update'),
+]
+
+
+admin_urlpatterns = [
+    url(r'^$', admin_views.AdminBillsSheetList.as_view()),
+    url(r'^bill_sheet/', include(admin_bill_sheet_patterns)),
+]
+
+
 urlpatterns = [
     url(r'^$', views.BillsSheetList.as_view()),
     url(r'^bill_sheet/', include(bill_sheet_patterns)),
     url(r'^bill_info/delete/(?P<uid>.+)/$', views.BillsInfoDelete.as_view(), name='bills_info_delete'),
+    url(r'^admin/', include(admin_urlpatterns, namespace='expense_admin')),
 ]

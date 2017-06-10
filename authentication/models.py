@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-08 21:47
-# Last modified: 2017-06-10 15:38
+# Last modified: 2017-06-10 19:27
 # Filename: models.py
 # Description:
 from uuid import uuid4
@@ -17,8 +17,8 @@ class User(models.Model):
     auth = models.OneToOneField(_User, on_delete=models.CASCADE)
     uid = models.UUIDField(default=uuid4, editable=False, unique=True)
     student_id = models.IntegerField(verbose_name='学号', primary_key=True)
-    level = models.CharField(verbose_name='权限等级', choices=USER_LEVELS,
-                             default=USER_LEVEL_E, max_length=20)
+    level = models.IntegerField(verbose_name='权限等级', choices=USER_LEVELS,
+                                default=USER_LEVEL_E)
 
     class Meta:
         verbose_name = '用户'
