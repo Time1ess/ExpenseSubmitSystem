@@ -1,4 +1,4 @@
-{% extends "base/layout.html" %}
+{% extends "bills/layout.html" %}
 {% load static %}
 
 {% block header_css %}
@@ -55,5 +55,5 @@
 {% block footer_js %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/bills.js' %}"></script>
-<script id="ajax_setup">$.ajaxSetup({beforeSend: function(xhr, settings){xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');}});$("#ajax_setup").remove();</script>
+{% include 'base/csrf_setup.html' %}
 {% endblock %}

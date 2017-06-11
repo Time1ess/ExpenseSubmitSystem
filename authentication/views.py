@@ -3,14 +3,18 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-08 19:57
-# Last modified: 2017-06-10 15:40
+# Last modified: 2017-06-11 08:49
 # Filename: views.py
 # Description:
 from django.views.generic.edit import CreateView
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.models import User
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import login
+from django.http import HttpResponseRedirect
+from django.utils.http import is_safe_url
 
+from . import LOGIN_REDIRECTS, USER_LEVEL_E
 from .forms import RegisterForm
 
 
@@ -30,3 +34,27 @@ class RegisterView(CreateView):
         form.instance.auth = user
         login(self.request, user)
         return super().form_valid(form)
+
+
+class ExpenseLogin(LoginView):
+    template_name = 'authentication/login.html'
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        """Ensure the user-originating redirection URL is safe."""
+        redirect_to = self.request.POST.get(
+            self.redirect_field_name,
+            self.request.GET.get(self.redirect_field_name, '')
+        )
+        url_is_safe = is_safe_url(
+            url=redirect_to,
+            allowed_hosts=self.get_success_url_allowed_hosts(),
+            require_https=self.request.is_secure(),
+        )
+        user = self.request.user
+        if not url_is_safe:
+            if user.is_authenticated():
+                return reverse(LOGIN_REDIRECTS[user.user.level])
+            else:
+                return reverse(LOGIN_REDIRECTS[USER_LEVEL_E])
+        return redirect_to

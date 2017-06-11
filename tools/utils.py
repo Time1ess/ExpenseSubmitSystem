@@ -3,10 +3,13 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-10 16:35
-# Last modified: 2017-06-10 17:55
+# Last modified: 2017-06-11 10:59
 # Filename: utils.py
 # Description:
 from django.core.exceptions import PermissionDenied
+from django.utils.dateparse import parse_datetime
+from django.utils.timezone import make_aware
+
 from guardian.shortcuts import assign_perm, remove_perm
 
 
@@ -33,3 +36,10 @@ def check_perm(perm, user, obj, raise_403=True):
         raise PermissionDenied()
     else:
         return False
+
+
+def parse_utc(dt, tz=None):
+    if not dt:
+        return dt
+    dt_obj = parse_datetime(dt)
+    return make_aware(dt_obj, timezone=tz)

@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-08 19:51
-# Last modified: 2017-06-10 20:34
+# Last modified: 2017-06-11 12:31
 # Filename: urls.py
 # Description:
 from django.conf.urls import url, include
@@ -14,9 +14,7 @@ from . import admin_views
 
 bill_sheet_patterns = [
     url(r'^create/$', views.BillsSheetCreate.as_view(), name='bills_sheet_create'),
-    url(r'^list/', include([
-        url(r'^$', views.BillsSheetList.as_view(), name='bills_sheet_list'),
-        url(r'^(?P<page>\d+)/$', views.BillsSheetList.as_view(), name='bills_sheet_list')])),
+    url(r'^list/', views.BillsSheetList.as_view(), name='bills_sheet_list'),
     url(r'^detail/(?P<uid>.+)/$', views.BillsSheetDetail.as_view(), name='bills_sheet_detail'),
     url(r'^update/(?P<uid>.+)/$', views.BillsSheetUpdate.as_view(), name='bills_sheet_update'),
     url(r'^delete/', include([
@@ -25,9 +23,8 @@ bill_sheet_patterns = [
 ]
 
 admin_bill_sheet_patterns = [
-    url(r'^list/', include([
-        url(r'^$', admin_views.AdminBillsSheetList.as_view(), name='bills_sheet_list'),
-        url(r'^(?P<page>\d+)/$', admin_views.AdminBillsSheetList.as_view(), name='bills_sheet_list')])),
+    url(r'^list/', admin_views.AdminBillsSheetList.as_view(), name='bills_sheet_list'),
+    url(r'^stats/$', admin_views.AdminBillsSheetStatistic.as_view(), name='bills_sheet_statistic'),
     url(r'^detail/(?P<uid>.+)/$', admin_views.AdminBillsSheetDetail.as_view(), name='bills_sheet_detail'),
     url(r'^update/(?P<uid>.+)/$', admin_views.AdminBillsSheetDetail.as_view(), name='bills_sheet_update'),
 ]

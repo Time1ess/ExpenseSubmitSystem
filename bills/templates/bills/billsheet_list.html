@@ -1,4 +1,4 @@
-{% extends "base/layout.html" %}
+{% extends "bills/layout.html" %}
 {% load static %}
 
 {% block header_css %}
@@ -11,37 +11,13 @@
     <div class="list-header">
         <h2>历史记录</h2>
     </div>
-    <form method="POST" action="{% url 'bills_sheet_delete' %}" id="billsheet_list_form">
-        {% csrf_token %}
-        {% include "bills/widgets/billsheet_list_table.html" %}
-    </form>
-    {% if is_paginated %}
-    <div class="pagination">
-        <span class="page-links">
-            {% if is_admin %}
-            {% if page_obj.has_previous %}
-            <a href="{% url 'expense_admin:bills_sheet_list'  page=page_obj.previous_page_number %}">上一页</a>
-            {% endif %}
-            <span class="page-current">
-                第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}页
-            </span>
-            {% if page_obj.has_next %}
-            <a href="{% url 'expense_admin:bills_sheet_list'  page=page_obj.next_page_number %}">下一页</a>
-            {% endif %}
-            {% else %}
-            {% if page_obj.has_previous %}
-            <a href="{% url 'bills_sheet_list'  page=page_obj.previous_page_number %}">上一页</a>
-            {% endif %}
-            <span class="page-current">
-                第 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}页
-            </span>
-            {% if page_obj.has_next %}
-            <a href="{% url 'bills_sheet_list'  page=page_obj.next_page_number %}">下一页</a>
-            {% endif %}
-            {% endif %}
-        </span>
+    {% include "bills/widgets/search_form.html" %}
+    <div class="container">
+        <form method="POST" action="{% url 'bills_sheet_delete' %}" id="billsheet_list_form">
+            {% csrf_token %}
+            {% include "bills/widgets/billsheet_list_table.html" %}
+        </form>
     </div>
-    {% endif %}
 </div>
 
 </div>

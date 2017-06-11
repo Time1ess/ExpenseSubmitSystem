@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-08 19:29
-# Last modified: 2017-06-10 16:09
+# Last modified: 2017-06-10 21:59
 # Filename: settings.py
 # Description:
 """
@@ -146,5 +146,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-LOGIN_REDIRECT_URL = '/bills'
 LOGIN_URL = '/accounts/login'
