@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-09 10:57
-# Last modified: 2017-06-10 20:51
+# Last modified: 2017-06-12 09:32
 # Filename: __init__.py
 # Description:
 BTYPE_OFFICE = 'office'
@@ -76,10 +76,10 @@ _BILL_TYPES_DESC = (
 BILL_TYPES_DESC = tuple((key, desc) for (key, disp), desc in
                         zip(BILL_TYPES, _BILL_TYPES_DESC))
 
-ESTATUS_SUBMIT = 'submit'
-ESTATUS_REJECT = 'reject'
-ESTATUS_AMEND = 'amend'
-ESTATUS_APPROVE = 'approve'
+ESTATUS_SUBMIT = 0
+ESTATUS_AMEND = 1
+ESTATUS_REJECT = 2
+ESTATUS_APPROVE = 3
 EXPENSE_STATUSES = (
     (ESTATUS_SUBMIT, '提交'),
     (ESTATUS_REJECT, '拒绝'),

@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-10 15:41
-# Last modified: 2017-06-11 13:24
+# Last modified: 2017-06-12 09:37
 # Filename: admin_views.py
 # Description:
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
@@ -75,7 +75,7 @@ class AdminBillsSheetDetail(AdminPermissionRequired, BillsSheetDetail):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        status = request.POST.get('status', None)
+        status = int(request.POST.get('status', -1))
         if status not in ESTATUS_TYPES:
             raise PermissionDenied()
         self.object.status = status

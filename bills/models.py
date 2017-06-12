@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2017-06-09 10:42
-# Last modified: 2017-06-11 11:05
+# Last modified: 2017-06-12 09:37
 # Filename: models.py
 # Description:
 from uuid import uuid4
@@ -20,13 +20,12 @@ class BillSheet(models.Model):
     user = models.ForeignKey(User, verbose_name='申报人')
     count = models.IntegerField(verbose_name='总单据数')
     amount = models.FloatField(verbose_name='总金额')
-    status = models.CharField(verbose_name='报销单状态', max_length=30,
-                              choices=EXPENSE_STATUSES)
+    status = models.IntegerField(verbose_name='报销单状态', choices=EXPENSE_STATUSES)
 
     class Meta:
         verbose_name = '报销单'
         verbose_name_plural = '报销单'
-        ordering = ['-created']
+        ordering = ['status', 'created']
         permissions = (
             ('view_billsheet', '查看报销单'),
         )
