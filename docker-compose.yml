@@ -30,7 +30,7 @@ services:
         build: ./nginx
         image: youchendu/srpa_nginx
         ports:
-            - "80:8005"
+            - "9020:8005"
         links:
             - web:web
         volumes_from:

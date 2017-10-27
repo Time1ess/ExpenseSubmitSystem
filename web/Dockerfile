@@ -12,5 +12,4 @@ RUN chmod a+x /ExpenseSubmitSystem/web/entrypoint.sh
 
 EXPOSE 8005
 
-ENV ExpenseSubmitSystem_SETTINGS production
 ENTRYPOINT ["/ExpenseSubmitSystem/web/entrypoint.sh"]
