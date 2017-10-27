@@ -17,18 +17,18 @@ services:
     web:
         restart: always
         build: ./web
-        image: youchendu/srpa_web
+        image: youchendu/expensesubmitsystem_web
         depends_on:
             db:
                 condition: service_healthy
         links:
-            - db:ExpenseSubmitSystem
+            - db:db
         expose:
             - "8005"
     nginx:
         restart: always
         build: ./nginx
-        image: youchendu/srpa_nginx
+        image: youchendu/expensesubmitsystem_nginx
         ports:
             - "9020:8005"
         links:
