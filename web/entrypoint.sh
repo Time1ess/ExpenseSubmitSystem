@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Initializing Django server"
-cd ExpenseSubmitSystem
+cd /ExpenseSubmitSystem
 echo "Pulling new changes from git repository"
 git pull
 echo "Installing requirements"
