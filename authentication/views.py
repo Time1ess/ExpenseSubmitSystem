@@ -11,6 +11,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import login
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils.http import is_safe_url
 
@@ -32,7 +33,7 @@ class RegisterView(CreateView):
             password=password,
             first_name=first_name)
         form.instance.auth = user
-        login(self.request, user)
+        login(self.request, user, settings.AUTHENTICATION_BACKENDS[0])
         return super().form_valid(form)
 
 
