@@ -55,7 +55,7 @@ class ExpenseLogin(LoginView):
         user = self.request.user
         if not url_is_safe:
             if user.is_authenticated():
-                return reverse(LOGIN_REDIRECTS[user.user.level])
+                return reverse(LOGIN_REDIRECTS[int(user.user.level)])
             else:
                 return reverse(LOGIN_REDIRECTS[USER_LEVEL_E])
         return redirect_to
