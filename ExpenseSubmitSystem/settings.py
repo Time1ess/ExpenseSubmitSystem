@@ -71,7 +71,7 @@ ROOT_URLCONF = 'ExpenseSubmitSystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'expensesubmitsystem', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'ExpenseSubmitSystem', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
